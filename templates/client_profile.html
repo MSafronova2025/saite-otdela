@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Личный кабинет клиента</h2>
+    <div class="card p-4 mt-3">
+        <p><strong>Логин:</strong> {{ user.username }}</p>
+        <p><strong>Роль:</strong> Клиент</p>
+
+        <div class="mt-4">
+            <a href="{% url 'submit_request' %}" class="btn btn-outline-primary w-100 mb-2">
+                Подать заявку на оборудование/ремонт
+            </a>
+
+            <a href="{% url 'my_requests' %}" class="btn btn-outline-success w-100 mb-2">
+                Мои заявки
+            </a>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Управление пользователями</h4>
+                </div>
+
+                <div class="card-body">
+                    {% if users %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle table-hover">
+                            <thead class="table-dark">
+                                <tr class="text-center">
+                                    <th>#</th>
+                                    <th>Логин</th>
+                                    <th>Email</th>
+                                    <th>Роль</th>
+                                    <th>Изменить роль</th>
+                                    <th>Удалить</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr>
+                                    <td class="text-center">{{ forloop.counter }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.email }}</td>
+                                    <td class="text-center">
+                                        {% if user.role == 'admin' %}
+                                            <span class="badge bg-primary">Администратор</span>
+                                        {% elif user.role == 'manager' %}
+                                            <span class="badge bg-success">Менеджер</span>
+                                        {% elif user.role == 'client' %}
+                                            <span class="badge bg-secondary">Клиент</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group">
+                                            <a href="{% url 'change_user_role' user.id 'admin' %}" class="btn btn-sm btn-outline-primary">Админ</a>
+                                            <a href="{% url 'change_user_role' user.id 'manager' %}" class="btn btn-sm btn-outline-success">Менеджер</a>
+                                            <a href="{% url 'change_user_role' user.id 'client' %}" class="btn btn-sm btn-outline-secondary">Клиент</a>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{% url 'delete_user' user.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Удалить пользователя?');">Удалить</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                        <div class="alert alert-info text-center" role="alert">
+                            Пользователи не найдены.
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="card-footer text-muted text-center small">
+                    Всего пользователей: {{ users|length }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

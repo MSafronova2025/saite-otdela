@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Ремонтно-эксплуатационные нужды колледжей</h2>
+    <p class="mb-4 text-center">
+        На данной странице представлены актуальные данные о потребностях колледжей Восточно-Казахстанской области в ремонтных работах и эксплуатации объектов.
+    </p>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Наименование колледжа</th>
+                <th>Населённый пункт</th>
+                <th>Необходимые работы</th>
+                <th>Статус выполнения</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repair in repairs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ repair.college.name }}</td>
+                <td>{{ repair.college.city }}</td>
+                <td>{{ repair.repair_description }}</td>
+                <td>
+                    {% if repair.repair_status == 'planned' %}
+                        <span class="badge bg-warning text-dark">Планируется</span>
+                    {% elif repair.repair_status == 'completed' %}
+                        <span class="badge bg-success">Завершено</span>
+                    {% elif repair.repair_status == 'urgent' %}
+                        <span class="badge bg-danger">Требует срочного выполнения</span>
+                    {% else %}
+                        {{ repair.repair_status }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">Данных пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">{{ page_title }}</h2>
+
+    <form method="post" class="card p-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="{% url 'manage_colleges' %}" class="btn btn-secondary mt-2">Отмена</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+
+    <h2 class="text-center mb-4">Формирование рабочих отчетов</h2>
+
+    <div class="text-center mb-5">
+        <a href="{% url 'reports' %}" class="btn btn-outline-primary">Назад к аналитике и фотоматериалам</a>
+    </div>
+
+    <!-- Потребности колледжей -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Потребности колледжей</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Колледж</th>
+                            <th>Потребность</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for need in needs %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ need.college.name }}</td>
+                            <td>{{ need.need_description }}</td>
+                            <td>{{ need.status }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center">Нет данных</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ремонтные работы колледжей -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Ремонтные работы колледжей</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Колледж</th>
+                            <th>Описание ремонта</th>
+                            <th>Статус ремонта</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for repair in repairs %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ repair.college.name }}</td>
+                            <td>{{ repair.repair_description }}</td>
+                            <td>{{ repair.repair_status }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center">Нет данных</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Техническое состояние зданий -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">Техническое состояние зданий</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Колледж</th>
+                            <th>Год постройки</th>
+                            <th>Техническое состояние</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for condition in conditions %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ condition.college.name }}</td>
+                            <td>{{ condition.year_built }}</td>
+                            <td>{{ condition.condition_status }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" class="text-center">Нет данных</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

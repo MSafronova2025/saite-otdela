@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Мониторинг потребностей колледжей</h2>
+    <p class="mb-4 text-center">
+        Здесь представлена актуальная информация о потребностях колледжей Восточно-Казахстанской области в оборудовании, материальных ресурсах и ремонтных работах.
+    </p>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Наименование колледжа</th>
+                <th>Населённый пункт</th>
+                <th>Потребность</th>
+                <th>Статус запроса</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in needs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.college.name }}</td>
+                <td>{{ item.college.city }}</td>
+                <td>{{ item.need_description }}</td>
+                <td>
+                    {% if item.status == 'pending' %}
+                        <span class="badge bg-warning text-dark">На рассмотрении</span>
+                    {% elif item.status == 'approved' %}
+                        <span class="badge bg-success">Одобрено</span>
+                    {% elif item.status == 'rejected' %}
+                        <span class="badge bg-danger">Отклонено</span>
+                    {% else %}
+                        {{ item.status }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">Данных пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

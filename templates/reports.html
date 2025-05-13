@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+
+    <!-- Заголовок страницы -->
+    <section class="mb-5 text-center">
+        <h2 class="mb-3">Отчеты и аналитика</h2>
+        <p class="fs-5 text-muted">
+            На данной странице размещаются сводные отчеты, аналитические данные и ключевые показатели по состоянию материально-технической базы колледжей Восточно-Казахстанской области.
+        </p>
+    </section>
+
+    <!-- Карточки отчетов -->
+    <section class="row g-4">
+
+        <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 bg-light rounded-4 shadow-sm">
+                <h5 class="mb-3">Анализ технического состояния зданий</h5>
+                <p class="mb-0">
+                    Сводные данные о количестве объектов в отличном, удовлетворительном и аварийном состоянии по итогам мониторинга.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 bg-light rounded-4 shadow-sm">
+                <h5 class="mb-3">Потребности в ремонтах и оборудовании</h5>
+                <p class="mb-0">
+                    Обобщенная информация о потребностях колледжей в ремонтах зданий и оснащении новым оборудованием.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 bg-light rounded-4 shadow-sm">
+                <h5 class="mb-3">Реализация программ модернизации</h5>
+                <p class="mb-0">
+                    Данные о ходе реализации государственных и региональных программ по модернизации инфраструктуры колледжей.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 bg-light rounded-4 shadow-sm">
+                <h5 class="mb-3">Динамика устранения нарушений</h5>
+                <p class="mb-0">
+                    Статистика по устранению выявленных замечаний в части пожарной безопасности, безбарьерной среды и эксплуатации зданий.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="h-100 p-4 bg-light rounded-4 shadow-sm">
+                <h5 class="mb-3">Индикаторы эффективности использования ресурсов</h5>
+                <p class="mb-0">
+                    Показатели оптимального использования материальных ресурсов в учреждениях системы ТиПО.
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Раздел: Фотоматериалы -->
+<section class="mt-5 pt-5 border-top">
+    <h3 class="text-center mb-4">Фотоматериалы закупленного оборудования</h3>
+    <p class="fs-5 text-muted text-center mb-5">
+        Примеры оборудования, закупленного в рамках реализации проектов модернизации материально-технической базы колледжей.
+    </p>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo1.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 1" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo2.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 2" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo3.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 3" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo4.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 4" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo5.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 5" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'equipment/photo6.jpg' %}" class="img-fluid rounded-4 shadow-sm gallery-image" alt="Оборудование 6" data-bs-toggle="modal" data-bs-target="#photoModal" style="cursor: pointer;">
+        </div>
+    </div>
+</section>
+
+<!-- Модальное окно для увеличения фото -->
+<div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-transparent border-0">
+      <div class="modal-body p-0">
+        <img src="" id="modalImage" class="img-fluid rounded-4 shadow">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Скрипт для подстановки фото в модалку -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const galleryImages = document.querySelectorAll('.gallery-image');
+        const modalImage = document.getElementById('modalImage');
+
+        galleryImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modalImage.src = this.src;
+            });
+        });
+    });
+</script>
+
+
+</div>
+{% endblock %}

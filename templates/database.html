@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Банк данных объектов колледжей</h2>
+    <p class="mb-4 text-center">
+        Здесь представлен список колледжей Восточно-Казахстанской области с основной информацией об объектах материально-технической базы.
+    </p>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Наименование колледжа</th>
+                <th>Населённый пункт</th>
+                <th>Тип здания</th>
+                <th>Форма собственности</th>
+                <th>Год постройки</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for college in colleges %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ college.name }}</td>
+                <td>{{ college.city }}</td>
+                <td>{{ college.building_type }}</td>
+                <td>{{ college.ownership_form }}</td>
+                <td>{{ college.year_built }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6" class="text-center">Данных пока нет.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

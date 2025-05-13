@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Управление заявками клиентов</h2>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Клиент</th>
+                    <th>Тема заявки</th>
+                    <th>Описание</th>
+                    <th>Статус</th>
+                    <th>Дата подачи</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for req in requests %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ req.user.username }}</td>
+                    <td>{{ req.title }}</td>
+                    <td>{{ req.description }}</td>
+                    <td>
+                        {% if req.status == 'pending' %}
+                            <span class="badge bg-warning text-dark">На рассмотрении</span>
+                        {% elif req.status == 'approved' %}
+                            <span class="badge bg-success">Одобрено</span>
+                        {% elif req.status == 'rejected' %}
+                            <span class="badge bg-danger">Отклонено</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ req.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="{% url 'change_request_status' req.id 'approved' %}" class="btn btn-sm btn-success">Одобрить</a>
+                            <a href="{% url 'change_request_status' req.id 'rejected' %}" class="btn btn-sm btn-danger">Отклонить</a>
+                            <a href="{% url 'delete_request' req.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Удалить заявку?');">Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="text-center">Нет заявок.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

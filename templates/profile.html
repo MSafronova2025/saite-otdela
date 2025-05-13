@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Личный кабинет</h2>
+    <div class="card p-4 mt-3">
+        <p><strong>Логин:</strong> {{ user.username }}</p>
+        <p><strong>Роль:</strong> {{ user.get_role_display }}</p>
+        <div class="text-center mt-4">
+            <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

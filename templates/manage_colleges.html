@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Управление колледжами</h2>
+
+    <div class="text-end mb-3">
+        <a href="{% url 'add_college' %}" class="btn btn-success">Добавить колледж</a>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Наименование</th>
+                <th>Населённый пункт</th>
+                <th>Тип здания</th>
+                <th>Форма собственности</th>
+                <th>Год постройки</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for college in colleges %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ college.name }}</td>
+                <td>{{ college.city }}</td>
+                <td>{{ college.building_type }}</td>
+                <td>{{ college.ownership_form }}</td>
+                <td>{{ college.year_built }}</td>
+                <td>
+                    <a href="{% url 'edit_college' college.id %}" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a href="{% url 'delete_college' college.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Удалить колледж?');">Удалить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="7" class="text-center">Колледжи не найдены.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Управление ремонтными заявками колледжей</h2>
+
+    <div class="text-end mb-3">
+        <a href="{% url 'add_repair' %}" class="btn btn-success">Добавить заявку на ремонт</a>
+    </div>
+
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Наименование колледжа</th>
+                <th>Необходимые работы</th>
+                <th>Статус выполнения</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for repair in repairs %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ repair.college.name }}</td>
+                <td>{{ repair.repair_description }}</td>
+                <td>
+                    {% if repair.repair_status == 'planned' %}
+                        <span class="badge bg-warning text-dark">Планируется</span>
+                    {% elif repair.repair_status == 'completed' %}
+                        <span class="badge bg-success">Завершено</span>
+                    {% elif repair.repair_status == 'urgent' %}
+                        <span class="badge bg-danger">Требует срочного выполнения</span>
+                    {% else %}
+                        {{ repair.repair_status }}
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_repair' repair.id %}" class="btn btn-sm btn-primary">Редактировать</a>
+                    <a href="{% url 'delete_repair' repair.id %}" class="btn btn-sm btn-danger" onclick="return confirm('Удалить заявку?');">Удалить</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5" class="text-center">Заявки на ремонт не найдены.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Регистрация</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label>Логин</label>
+            <input type="text" name="username" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Пароль</label>
+            <input type="password" name="password" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label>Роль</label>
+            <select name="role" class="form-control">
+                <option value="client">Клиент</option>
+                <option value="manager">Менеджер</option>
+                <option value="admin">Администратор</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+    </form>
+    <div class="text-center mt-3">
+        Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+    </div>
+</div>
+{% endblock %}
