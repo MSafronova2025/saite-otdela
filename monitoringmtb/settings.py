@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9@xwgz%qlt%)_qv@!_t+g#^r_95ajs-*e5*tc*)w3%ftt*x6ks
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [https://saite-otdela.onrender.com]
 
 AUTH_USER_MODEL = 'colleges.CustomUser'
 
