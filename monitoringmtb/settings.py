@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-9@xwgz%qlt%)_qv@!_t+g#^r_95ajs-*e5*tc*)w3%ftt*x6ks
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [https://saite-otdela.onrender.com]
+import os
+
+ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '127.0.0.1')]
+
 
 AUTH_USER_MODEL = 'colleges.CustomUser'
 
@@ -133,4 +136,4 @@ import os
 
 if os.getenv('RENDER'):
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    ALLOWED_HOSTS = ['your-app-name.onrender.com']
+    ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', '127.0.0.1')]
